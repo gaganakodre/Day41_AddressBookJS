@@ -1,26 +1,50 @@
-class AddressBook
+var prompt = require("prompt-sync")({sigint: true});
+class Person
 {
-    //property
-    firstname;
-    lastname;
+    //properties
+    firstName;
+    lastName;
     address;
     city;
     state;
-    zip;
-    phoneNumber;
-    email;
+    zipCode;
+    phoneNumber;  
+    emailId;
 
-
-    //constructor
-    constructor(...params)
+    //defining constructor of class using constructor keeyword
+    constructor(...parameters)
     {
-        this.firstname=params[0];
-        this.lastname=params[1];
-        this.address=params[2];
-        this.city=params[3];
-        this.state=params[4]
-        this.zip=params[5];
-        this.phoneNumber=params[6];
-        this.email=params[7];
+        this.firstName = parameters[0];
+        this.lastName = parameters[1];
+        this.address = parameters[2];
+        this.city = parameters[3];
+        this.state = parameters[4];
+        this.zipCode = parameters[5];
+        this.phoneNumber = parameters[6]; 
+        this.emailId = parameters[7];
     }
+    //methid to return everything in string
+    toString()
+    {
+        return `First Name: ${this.firstName}\nLast Name: ${this.lastName}\nAddress: ${this.address}\nCity: ${this.city}\nState: ${this.state}\nZipCode: ${this.zipCode}\nPhone Number: ${this.phoneNumber}\nEmail-Id: ${this.emailId}`;
+    }
+}
+try
+{
+    let firstName = prompt('Enter FirstName: ');
+    let lastName = prompt('Enter lastName: ');
+    let address = prompt('Enter Address: ');
+    let city = prompt('Enter city: ');
+    let state = prompt('Enter state: ');
+    let zipCode = parseInt(prompt('Enter Zip Code: '));
+    let phoneNumber = parseInt(prompt('Enter Phone Number: '));
+    let emailId = prompt('Enter Email Id: ');
+    //Object for class
+    let person = new Person(firstName,lastName,address,city,state,zipCode,phoneNumber,emailId);
+    console.log("************************Contact Deatils******************");
+   console.log(person.toString());
+}
+catch(e)
+{
+    console.error(e);
 }
