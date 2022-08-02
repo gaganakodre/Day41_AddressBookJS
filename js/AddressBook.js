@@ -1,183 +1,125 @@
-var prompt = require("prompt-sync")();
-class AddressBook
+class Person
 {
-    //property
-    firstname;
-    lastname;
+    //properties
+    firstName;
+    lastName;
     address;
     city;
     state;
-    zip;
-    phoneNumber;
-    email;
+    zipCode;
+    phoneNumber;  
+    emailId;
 
-
-    //constructor
-    constructor(...params)
+    //defining constructor of class using constructor keeyword
+    constructor(...parameters)
     {
-        this.firstname=params[0];
-        this.lastname=params[1];
-        this.address=params[2];
-        this.city=params[3];
-        this.state=params[4]
-        this.zip=params[5];
-        this.phoneNumber=params[6];
-        this.email=params[7];
+        this.firstName = parameters[0];
+        this.lastName = parameters[1];
+        this.address = parameters[2];
+        this.city = parameters[3];
+        this.state = parameters[4];
+        this.zipCode = parameters[5];
+        this.phoneNumber = parameters[6]; 
+        this.emailId = parameters[7];
     }
+    //methid to return everything in string
     toString()
     {
-        
-        return "firstname:"+this.firstname +"\tlastname:"+this.lastname +"\taddress:"+this.address +"\tcity:"+this.city +"\tstate:"+this.state +"\tzip:"+this.zip +"\tphonenumber:"+this.phoneNumber +"\temail:"+this.email; 
-        
-    }
-    get firstname() {return this._firstname; }
-    set lastname(firstname) {
-        try{
-            let firstnameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
-        if (firstnameRegex.test(firstname))//test is used to check pattren is mathing or not
-        {
-            this._firstname = firstname;
-        }
-        else throw 'FirstName is Incorrect! please specify atleast one uppercase at first';
-        this._firstname=firstname;
-        }
-        catch(e)
-        {
-            console.error(e);
-        }
-    }
-
-    get lastname() {return this._lastname; }
-    set lastname(lastname) {
-        try{
-            let lastnameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
-        if (lastnameRegex.test(lastname))//test is used to check pattren is mathing or not
-        {
-            this._lastname = lastname;
-        }
-        else throw 'LastName is Incorrect! please specify atleast one uppercase at first';
-        this._lastname=lastname;
-        }
-        catch(e)
-        {
-            console.error(e);
-        }
-    }
-    
-    get address() {return this._address; }
-    set address(address) {
-        try{
-            let addressRegex = RegExp('^[A-Za-z]{4,}$');
-        if (addressRegex.test(address))//test is used to check pattren is mathing or not
-        {
-            this._address = address;
-        }
-        else throw 'address is Incorrect! please enter atleast 4 character to accept'; 
-        this._address=address;
-        }
-        catch(e)
-        {
-            console.error(e);
-        }
-    }
-    get city() {return this._city; }
-    set city(city) {
-        try{
-            let cityRegex = RegExp('^[A-Za-z]{4,}$');
-        if (cityRegex.test(city))//test is used to check pattren is mathing or not
-        {
-            this._city = city;
-        }
-        else throw 'cityname is Incorrect! please enter atleast 4 character to accept'; 
-        this._city=city;
-        }
-        catch(e)
-        {
-            console.error(e);
-        }
-    }
-    get state() {return this._state; }
-    set state(state) {
-        try{
-            let stateRegex = RegExp('^[A-Za-z]{4,}$');
-        if (stateRegex.test(state))//test is used to check pattren is mathing or not
-        {
-            this._state = state;
-        }
-        else throw 'StateName is Incorrect! please enter atleast 4 character to accept'; 
-        this._state=state;
-        }
-        catch(e)
-        {
-            console.error(e);
-        }
-    }
-    get zip() {return this._zip; }
-    set zip(zip) {
-        try{
-            let zipRegex = RegExp('^[1-9](1)[0-9]{2,}$');
-        if (zipRegex.test(zip))//test is used to check pattren is mathing or not
-        {
-            this._zip = zip;
-        }
-        else throw 'zipcode is Incorrect!'; 
-        this._zip=zip;
-        }
-        catch(e)
-        {
-            console.error(e);
-        }
-    }
-    get phoneNumber() {return this._phoneNumber; }
-    set phoneNumber(phoneNumber) {
-        try{
-            let phoneNumberRegex = RegExp('^((\+91)?|91)?[789][0-9]{9}$');
-        if (phoneNumberRegex.test(phoneNumber))//test is used to check pattren is mathing or not
-        {
-            this._phoneNumber = phoneNumber;
-        }
-        else throw 'phoneNumber is Incorrect! eg:9881060153'; 
-        this._phoneNumber=phoneNumber;
-        }
-        catch(e)
-        {
-            console.error(e);
-        }
-    }
-    get email() {return this._email; }
-    set email(email) {
-        let emailRegex = RegExp('^[A-Z0-9a-z+_.-]{6,}+@[a-z.]$');
-        if (emailRegex.test(email))//test is used to check pattren is mathing or not
-        {
-            this._email =email;
-        }
-        else throw 'email is Incorrect! like:example.samplemail@gmail.com';
-        this._email=email;
-    }
-    toString()
-    {
-        
-        return "firstname:"+this.firstname +"\tlastname:"+this.lastname +"\taddress:"+this.address +"\tcity:"+this.city +"\tstate:"+this.state +"\tzip:"+this.zip +"\tphonenumber:"+this.phoneNumber +"\temail:"+this.email; 
-        
+        return `First Name: ${this.firstName}\nLast Name: ${this.lastName}\nAddress: ${this.address}\nCity: ${this.city}\nState: ${this.state}\nZipCode: ${this.zipCode}\nPhone Number: ${this.phoneNumber}\nEmail-Id: ${this.emailId}`;
     }
 }
-var prompt = require("prompt-sync")();
-addressbookArray=new Array();
-try{
-    firstname=prompt("entre ur firstname:");
-    lastname=prompt("entre ur Lastname:");
-    address=prompt("entre ur address:");
-    city=prompt("entre ur city:");
-    state=prompt("entre ur state:");
-    zip=prompt("entre ur city zip code:");
-    email=prompt("entre ur email:");
-    phoneNumber=prompt("entre ur phoneNumber:");
-    let addressBook=new AddressBook(firstname,lastname,address,city,state,zip,phoneNumber,email);
-    addressbookArray.push(addressBook).toString();
-    console.log(addressbookArray);
+try
+{
+    //regex patterns
+    let namePattern = new RegExp('^[A-Z]{1}[a-z]{2,}$');
+    let addresspattern = new RegExp('^[A-za-z\\s]{4,}$');
+    let emailPattern = new RegExp('^[a-z]([+. \-_]{1}\w+)?@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2})?$');
+    let phoneNumPattern =new RegExp('^[0-9]\\s[0-9]{10}$');
+    let zipCodePattern = new RegExp('^[1-9]{1}[0-9]{2}\\s?[0-9]{3}$');
+    //FirstName
+    let firstName = prompt('Enter FirstName: ');
+    if(!namePattern.test(firstName))
+        throw 'Error!! First name is in Incorrect Format';
+    //LastName
+    let lastName = prompt('Enter lastName: ');
+    if(!namePattern.test(lastName))
+        throw 'Error!! Last name is in Incorrect Format';
+    //Address
+    let address = prompt('Enter Address: ');
+    if(!addresspattern.test(address))
+        throw 'Error!! Address should have minimum 4 characters';
+    //city
+    let city = prompt('Enter city: ');
+    if(!addresspattern.test(city))
+        throw 'Error!! City should have minimum 4 characters';
+    //state
+    let state = prompt('Enter state: ');
+    if(!addresspattern.test(state))
+        throw 'Error!! State should have minimum 4 characters';
+    //zipCode
+    let zipCode = prompt('Enter Zip Code: ');
+    if(!zipCodePattern.test(zipCode))
+        throw 'Error!! ZipCode is not valid';
+    //phone number
+    let phoneNumber = prompt('Enter Phone Number: ');
+    if(phoneNumPattern.test(phoneNumber))
+        throw 'Error!! PhoneNumber is not valid';
+    //email id
+    let emailId = prompt('Enter Email Id: ');
+    if(emailPattern.test(emailId))
+        throw 'Error!! Email Id is not valid';
+    //Object for class
+    let person = new Person(firstName,lastName,address,city,state,zipCode,phoneNumber,emailId);
+    console.log("************************Contacts Deatils******************");
+    console.log(person.toString());
 }
 catch(e)
 {
     console.error(e);
 }
-//"Janardhana","Hd","RRnagara","Bengaluru","Karnataka",90876,9881060153,"example.samplemail@gmail.com"
+let AddContacts = () =>
+{
+    let numOfPersons = parseInt(prompt('Enter Number of contacts you want to add? : '));
+    while(numOfPersons--)
+    {
+        let person = ValidateAndAdd();
+        addressBookPersonArr.push(person);
+        console.log("***********************");
+    }
+}
+let DisplayContacts = () =>
+{
+    console.log("AddressBook");
+   addressBookPersonArr.forEach(x => console.log(x.toString())); 
+}
+let AddressBookOperations = () =>
+{
+    try
+    {
+        while(true)
+        {
+            console.log("\n1.Add new contacts to addressbook\n2.Display\n3.exit");
+            switch(parseInt(prompt('Enter the choice? : ')))
+            {
+                case 1:
+                    AddContacts();
+                    break;
+                case 2:
+                    DisplayContacts();
+                    break;
+                case 3:
+                    console.log("Exited");
+                    return;
+                default:
+                    console.log("Enter Valid Option");
+                    break;
+            }
+        }
+    }
+    catch(e)
+    {
+        console.error(e);
+    }   
+        
+}
+AddressBookOperations();
