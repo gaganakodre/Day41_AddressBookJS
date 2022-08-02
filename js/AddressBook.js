@@ -118,11 +118,11 @@ class AddressBook
         
     }
 }
-//addressbookArray=new Array();
+addressbookArray=new Array();//UC3
 try{
     let addressBook=new AddressBook("Janardhana","Hd","RRnagara","Bengaluru","Karnataka",90876,9881060153,"example.samplemail@gmail.com");
-    //addressbookArray.push(addressBook).toString();
-    console.log(addressBook.toString());
+    addressbookArray.push(addressBook).toString();
+    console.log(addressbookArray);
 }
 catch(e)
 {
