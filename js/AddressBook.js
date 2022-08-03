@@ -125,8 +125,10 @@ let ValidateAndAdd = () =>
         while(true)
         {
             var firstName =getName('FirstName');
-            if(firstName!=null)
+            var exists = addressBookPersonArr.filter((x)=>x.firstName==firstName);
+            if(firstName!=null && exists.length==0)
                 break;
+            console.log("First name already present");
         }
         //LastName
         while(true)
@@ -390,13 +392,80 @@ let countContacts = () =>
         console.error(e);
     }
 }
+//UC8-SearchByStateorCity
+let SearchContacts = () =>
+{
+    try
+    {
+        while(true)
+        {
+            console.log("**************\n1.SearchByCity\n2.SearchByState\n3.Exit");
+            switch(parseInt(prompt('Enter the choice? : ')))
+            {
+                case 1:
+                    //city
+                    while(true)
+                    {
+                        var cityName = getAddressDetails('city Name');
+                        if(cityName!=null)
+                            break;
+                    }
+                    //person
+                    while(true)
+                    {
+                        var pName = getName('Person Name');
+                        if(pName!=null)
+                            break;
+                    }
+                    //using filter and map search details by city name
+                    addressBookPersonArr.filter(
+                        (x)=>x.city ==cityName && x.firstName==pName
+                    ).map(
+                        (i) => console.log(i.toString()) 
+                    );
+                    break;
+                case 2:
+                    //state
+                    while(true)
+                    {
+                        var stateName = getAddressDetails('state');
+                        if(stateName!=null)
+                            break;
+                    }
+                    //person
+                    while(true)
+                    {
+                        var perName = getName('Person Name');
+                        if(perName!=null)
+                            break;
+                    }
+                    //using filter and map search details by city name
+                    addressBookPersonArr.filter(
+                        (x)=>x.state ==stateName && x.firstName==perName
+                    ).map(
+                        (i) => console.log(i.toString()) 
+                    );
+                    break;
+                case 3:
+                    console.log("Exit from search");
+                    return;
+
+            }
+        }
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+    
+}
 let AddressBookOperations = () =>
 {
     try
     {
         while(true)
         {
-            console.log("************************\n1.Add new contacts to addressbook\n2.Display\n3.Edit Contacts\n4.Delete\n5.count Contacts\n6.Exit");
+            console.log("************************\n1.Add new contacts to addressbook\n2.Display\n3.Edit Contacts\n4.Delete\n5.count Contacts\n6.Search Contacts\n7.Exit");
             switch(parseInt(prompt('Enter the choice? : ')))
             {
                 case 1:
@@ -409,12 +478,15 @@ let AddressBookOperations = () =>
                     EditContacts();
                     break;
                 case 4:
-                    deleteContacts();
+                    DeleteContacts();
                     break;
                 case 5:
-                    countContacts();
+                    CountContacts();
                     break;
                 case 6:
+                    SearchContacts();
+                    break;
+                case 7:
                     console.log("Exited");
                     return;
                 default:
