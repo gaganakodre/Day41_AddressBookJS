@@ -364,7 +364,7 @@ let deleteContacts = () =>
             const index = addressBookPersonArr.indexOf(deletePersonName);
             //using splice remove the element
             addressBookPersonArr.splice(index,1);
-            console.log("***************Deleted******************");
+            console.log("Deleted Contacts");
         }
         else
             throw "AddressBook Is empty";
@@ -399,7 +399,7 @@ let SearchContacts = () =>
     {
         while(true)
         {
-            console.log("**************\n1.SearchByCity\n2.SearchByState\n3.Exit");
+            console.log("\n1.SearchByCity\n2.SearchByState\n3.Exit");
             switch(parseInt(prompt('Enter the choice? : ')))
             {
                 case 1:
@@ -466,7 +466,7 @@ let ViewByCityOrState = () =>
     {
         while(true)
         {
-            console.log("**************\n1.ViewByCity\n2.ViewByState\n3.Exit");
+            console.log("\n1.ViewByCity\n2.ViewByState\n3.Exit");
             switch(parseInt(prompt('Enter the choice? : ')))
             {
                 case 1:
@@ -513,13 +513,69 @@ let ViewByCityOrState = () =>
         console.error(e);
     }
 }
+//UC10 CountByCityOrState
+let CountByCityOrState = () =>
+{
+    try
+    {
+        while(true)
+        {
+            console.log("\n1.CountByCity\n2.CountByState\n3.Exit");
+            switch(parseInt(prompt('Enter the choice? : ')))
+            {
+                case 1:
+                    //city
+                    while(true)
+                    {
+                        var cityName = getAddressDetails('city Name');
+                        if(cityName!=null)
+                            break;
+                    }
+                   
+                    //using filter and reduce view details by city name
+                    let cityCount = addressBookPersonArr.filter(
+                        (x)=>x.city ==cityName
+                    ).reduce(
+                        (i) => i+1,0 
+                    );
+                    console.log('\nThere are ${cityCount} person in ${cityName}');
+                    break;
+                case 2:
+                    //state
+                    while(true)
+                    {
+                        var stateName = getAddressDetails('state');
+                        if(stateName!=null)
+                            break;
+                    }
+                    
+                    //using filter and map reduce details by city name
+                    let stateCount = addressBookPersonArr.filter(
+                        (x)=>x.state ==stateName
+                    ).reduce(
+                        (i) => i+1,0 
+                    );
+                    console.log('\nThere are ${stateCount} person in ${stateName}');
+                    break;
+                case 3:
+                    console.log("Exit from search");
+                    return;
+
+            }
+        }
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+}
 let AddressBookOperations = () =>
 {
     try
     {
         while(true)
         {
-            console.log("************************\n1.Add new contacts to addressbook\n2.Display\n3.Edit Contacts\n4.Delete\n5.count Contacts\n6.Search Contacts\n7.View By city or state\n8.Exit");
+            console.log("\n1.Add new contacts to addressbook\n2.Display\n3.Edit Contacts\n4.Delete\n5.count Contacts\n6.Search Contacts\n7.View By city or state\n8.Count By city or state\n9.Exit");
             switch(parseInt(prompt('Enter the choice? : ')))
             {
                 case 1:
@@ -544,6 +600,9 @@ let AddressBookOperations = () =>
                     ViewByCityOrState();
                     break;
                 case 8:
+                    CountByCityOrState();
+                    break;
+                case 9:
                     console.log("Exited");
                     return;
                 default:
