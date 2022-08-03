@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-var prompt = require("prompt-sync")({sigint: true});
-=======
->>>>>>> UC3_AddingContactToarray
 class Person
 {
     //properties
@@ -13,7 +9,6 @@ class Person
     zipCode;
     phoneNumber;  
     emailId;
-
     //defining constructor of class using constructor keeyword
     constructor(...parameters)
     {
@@ -23,68 +18,181 @@ class Person
         this.city = parameters[3];
         this.state = parameters[4];
         this.zipCode = parameters[5];
-        this.phoneNumber = parameters[6]; 
+        this.phoneNumber = parameters[6];
         this.emailId = parameters[7];
     }
-    //methid to return everything in string
+    //method to return everything in string
     toString()
     {
-        return `First Name: ${this.firstName}\nLast Name: ${this.lastName}\nAddress: ${this.address}\nCity: ${this.city}\nState: ${this.state}\nZipCode: ${this.zipCode}\nPhone Number: ${this.phoneNumber}\nEmail-Id: ${this.emailId}`;
+        return `First Name: ${this.firstName}\nLast Name: ${this.lastName}\nAddress: ${this.address}\nCity: ${this.city}\nState: ${this.state}\nZipCode: ${this.zipCode}\nPhone Number: ${this.phoneNumber}\nEmail-Id: ${this.emailId}\n************`;
     }
 }
-try
+//Array to store objects
+var addressBookPersonArr = new Array();
+//method to validate name 
+let getName = (type) =>
 {
-    //regex patterns
     let namePattern = new RegExp('^[A-Z]{1}[a-z]{2,}$');
-    let addresspattern = new RegExp('^[A-za-z\\s]{4,}$');
-    let emailPattern = new RegExp('^[a-z]([+. \-_]{1}\w+)?@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2})?$');
-    let phoneNumPattern =new RegExp('^[0-9]\\s[0-9]{10}$');
-<<<<<<< HEAD
-    let zipCodePattern = new RegExp('^[1-9](1)[0-9]{2,}$');
-=======
-    let zipCodePattern = new RegExp('^[1-9]{1}[0-9]{2}\\s?[0-9]{3}$');
->>>>>>> UC3_AddingContactToarray
-    //FirstName
-    let firstName = prompt('Enter FirstName: ');
-    if(!namePattern.test(firstName))
-        throw 'Error!! First name is in Incorrect Format';
-    //LastName
-    let lastName = prompt('Enter lastName: ');
-    if(!namePattern.test(lastName))
-        throw 'Error!! Last name is in Incorrect Format';
-    //Address
-    let address = prompt('Enter Address: ');
-    if(!addresspattern.test(address))
-        throw 'Error!! Address should have minimum 4 characters';
-    //city
-    let city = prompt('Enter city: ');
-    if(!addresspattern.test(city))
-        throw 'Error!! City should have minimum 4 characters';
-    //state
-    let state = prompt('Enter state: ');
-    if(!addresspattern.test(state))
-        throw 'Error!! State should have minimum 4 characters';
-    //zipCode
-    let zipCode = prompt('Enter Zip Code: ');
-    if(!zipCodePattern.test(zipCode))
-        throw 'Error!! ZipCode is not valid';
-    //phone number
-    let phoneNumber = prompt('Enter Phone Number: ');
-    if(phoneNumPattern.test(phoneNumber))
-        throw 'Error!! PhoneNumber is not valid';
-    //email id
-    let emailId = prompt('Enter Email Id: ');
-    if(emailPattern.test(emailId))
-        throw 'Error!! Email Id is not valid';
-    //Object for class
-    let person = new Person(firstName,lastName,address,city,state,zipCode,phoneNumber,emailId);
-    console.log("************************Contacts Deatils******************");
-    console.log(person.toString());
+    try
+    {
+        let name =  prompt(`Enter ${type}: `);
+        if(!namePattern.test(name))
+            throw `Error!! ${type} is in Incorrect Format`;
+        else
+            return name;
+
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
 }
-catch(e)
+//method to validate address details
+let getAddressDetails = (type) =>
 {
-    console.error(e);
+    try
+    {
+        let addresspattern = new RegExp('^[A-za-z\\s]{4,}$');
+        let value = prompt(`Enter ${type}: `);
+        if(!addresspattern.test(value))
+                throw `Error!! ${type} should have minimum 4 characters`;
+        else
+            return value;
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
 }
+//method to validate zipcode
+let getZipCode = () =>
+{
+    try
+    {
+        let zipCodePattern = new RegExp('^[1-9]{1}[0-9]{2}\\s?[0-9]{3}$');
+        let zipCode = prompt('Enter Zip Code: ');
+        if(!zipCodePattern.test(zipCode))
+            throw 'Error!! ZipCode is not valid';
+        else
+            return zipCode;
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+    
+}
+//method to validate phone nu,mber
+let getPhoneNumber = () =>
+{
+    try
+    {
+        let phoneNumPattern =new RegExp('^[0-9]{2}\\s[0-9]{10}$');
+        let phoneNumber = prompt('Enter Phone Number: ');
+        if(!phoneNumPattern.test(phoneNumber))
+            throw 'Error!! PhoneNumber is not valid .. Eg. 91 9876543210';
+        else
+            return phoneNumber;
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+}
+//method to validate email
+let getEmail = () =>
+{
+    try
+    {
+        let emailPattern = new RegExp('^[A-za-z]+([+. \-_]{1}\w+)?@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2})?$');
+        let emailId = prompt('Enter Email Id: ');
+        if(!emailPattern.test(emailId))
+            throw 'Error!! Email Id is not valid';
+        else
+            return emailId;
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+}
+//method to add details into object
+let ValidateAndAdd = () =>
+{
+    try
+    {
+        //FirstName
+        while(true)
+        {
+            var firstName =getName('FirstName');
+            if(firstName!=null)
+                break;
+        }
+        //LastName
+        while(true)
+        {
+            var lastName = getName('LastName');
+            if(lastName!=null)
+                break;
+        }
+        //Address
+        while(true)
+        {
+            var address = getAddressDetails('address');
+            if(address!=null)
+                break;
+        }
+        
+        //city
+        while(true)
+        {
+            var city = getAddressDetails('city');
+            if(city!=null)
+                break;
+        }
+        
+        //state
+        while(true)
+        {
+            var state = getAddressDetails('state');
+            if(state!=null)
+                break;
+        }
+        
+        //zipCode
+        while(true)
+        {
+            var zipCode = getZipCode();
+            if(zipCode!=null)
+                break;
+        }
+        //phone number
+        while(true)
+        {
+            var phoneNumber = getPhoneNumber();
+            if(phoneNumber!=null)
+                break;
+        }
+        //email id
+        while(true)
+        {
+            var emailId = getEmail();
+            if(emailId!=null)
+                break;
+        }
+        
+        //-----------------------------------------------------------------------------------------------------
+        //Object for class
+        let person = new Person(firstName,lastName,address,city,state,zipCode,phoneNumber,emailId);
+        return person;    
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+       
+}
+//Function to add contacts into array
 let AddContacts = () =>
 {
     let numOfPersons = parseInt(prompt('Enter Number of contacts you want to add? : '));
@@ -95,10 +203,148 @@ let AddContacts = () =>
         console.log("***********************");
     }
 }
+//function to display contacts
 let DisplayContacts = () =>
 {
-    console.log("AddressBook");
-   addressBookPersonArr.forEach(x => console.log(x.toString())); 
+    if(addressBookPersonArr.length>0)
+    {
+        console.log("********************AddressBook*******************");
+        addressBookPersonArr.forEach(x => console.log(x.toString())); 
+    }
+    else
+    {
+        console.log("No details present");
+    }
+   
+}
+//function to edit contacts
+let EditContacts = () =>
+{
+    try
+    {
+        if(addressBookPersonArr.length>0)
+        {
+            while(true)
+            {
+                var editPersonName = getName('First name of person you want to edit');
+                if(editPersonName!=null)
+                    break;
+            }
+            let personDetails = addressBookPersonArr.find(x => x.firstName == editPersonName);
+            if(personDetails==null)
+                throw `Error!This ${editPersonName} name is not present`;
+            while(true)
+            {
+                console.log("1.Edit Firstname\n2.Edit Lastname\n3.Edit Address\n4.Edit city\n5.Edit State\n6.Zipcode\n7.Phone number\n8.email id\n9.Exit");
+                switch(parseInt(prompt('Enter the choice? : ')))
+                {
+                    case 1:
+                        //FirstName
+                        while(true)
+                        {
+                            var fName =getName('FirstName');
+                            if(fName!=null)
+                                break;
+                        }
+                        personDetails.firstName = fname;
+                        console.log("Edited");
+                        break;
+                    case 2:
+                        //LastName
+                        while(true)
+                        {
+                            var lName = getName('LastName');
+                            if(lName!=null)
+                                break;
+                        }
+                        personDetails.lastName = lName;
+                        console.log("Edited");
+                        break;
+                    case 3:
+                        //Address
+                        while(true)
+                        {
+                            var addr = getAddressDetails('address');
+                            if(addr!=null)
+                                break;
+                        }
+                        personDetails.address = addr;
+                        console.log("Edited");
+                        break;
+                    case 4:
+                        //city
+                        while(true)
+                        {
+                            var c = getAddressDetails('city');
+                            if(c!=null)
+                                break;
+                        }
+                        personDetails.city = c;
+                        console.log("Edited");
+                        break;
+                    case 5:
+                        //state
+                        while(true)
+                        {
+                            var s = getAddressDetails('state');
+                            if(s!=null)
+                                break;
+                        }
+                        personDetails.state = s;
+                        console.log("Edited");
+                        break;
+                    case 6:
+                        //zipCode
+                        while(true)
+                        {
+                            var ZC = getZipCode();
+                            if(ZC!=null)
+                                break;
+                        }
+                        personDetails.zipCode = ZC;
+                        console.log("Edited");
+                        break;
+                    case 7:
+                        //phone number
+                        while(true)
+                        {
+                            var pN = getPhoneNumber();
+                            if(pN!=null)
+                                break;
+                        }
+                        personDetails.phoneNumber = pN;
+                        console.log("Edited");
+                        break;
+                    case 8:
+                        //email id
+                        while(true)
+                        {
+                            var mailId = getEmail();
+                            if(mailId!=null)
+                                break;
+                        }
+                        personDetails.emailId = mailId;
+                        console.log("Edited");
+                        break;
+                    case 9:
+                        console.log("Exited");
+                        return;
+                    default:
+                        console.log("Enter correct value");
+                        break;
+
+                }
+            }
+        }
+        else
+            throw 'Address book is empty'
+        
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+    
 }
 let AddressBookOperations = () =>
 {
@@ -106,7 +352,7 @@ let AddressBookOperations = () =>
     {
         while(true)
         {
-            console.log("\n1.Add new contacts to addressbook\n2.Display\n3.exit");
+            console.log("************************\n1.Add new contacts to addressbook\n2.Display\n3.Edit Contacts\n4.Exit");
             switch(parseInt(prompt('Enter the choice? : ')))
             {
                 case 1:
@@ -116,6 +362,9 @@ let AddressBookOperations = () =>
                     DisplayContacts();
                     break;
                 case 3:
+                    EditContacts();
+                    break;
+                case 4:
                     console.log("Exited");
                     return;
                 default:
