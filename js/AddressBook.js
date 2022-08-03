@@ -372,13 +372,31 @@ let deleteContacts = () =>
         console.error(e);
     }
 }
+let countContacts = () =>
+{
+    try
+    {
+        if(addressBookPersonArr.length>0)
+        {
+            //using reducr count the array elements
+            let count = addressBookPersonArr.reduce((c)=>c+1,0);
+            console.log(`Total number of contacts  = ${count}`);
+        }
+        else
+            throw "AddressBook Is empty";
+    }
+    catch(e)
+    {
+        console.error(e);
+    }
+}
 let AddressBookOperations = () =>
 {
     try
     {
         while(true)
         {
-            console.log("************************\n1.Add new contacts to addressbook\n2.Display\n3.Edit Contacts\n4.Delete\n5.Exit");
+            console.log("************************\n1.Add new contacts to addressbook\n2.Display\n3.Edit Contacts\n4.Delete\n5.count Contacts\n6.Exit");
             switch(parseInt(prompt('Enter the choice? : ')))
             {
                 case 1:
@@ -394,6 +412,9 @@ let AddressBookOperations = () =>
                     deleteContacts();
                     break;
                 case 5:
+                    countContacts();
+                    break;
+                case 6:
                     console.log("Exited");
                     return;
                 default:
